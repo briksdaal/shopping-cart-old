@@ -1,19 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import ProductCard from '../components/ProductCard';
-import superMetroidImg from '../media/super_metroid.webp';
-import defaultGameImg from '../media/default_game.webp';
+import superMetroidImg from '../media/super_metroid_thumbnail.webp';
+import defaultGameImg from '../media/default_game_thumbnail.webp';
 
 const metroid = {
   id: 5,
   title: 'Super Metroid',
   price: '$29.00',
-  imgSrc: superMetroidImg
+  imgThumbSrc: superMetroidImg
 };
 
 describe('Product card tests', () => {
   it('Renders product title', () => {
     render(<ProductCard {...metroid} />);
-    const title = screen.getByRole('heading', { name: 'Super Metroid' });
+    const title = screen.getByRole('heading', {
+      name: 'Super Metroid'
+    });
 
     expect(title).toBeInTheDocument();
   });
@@ -30,7 +32,7 @@ describe('Product card tests', () => {
     const img = screen.getByRole('img');
 
     expect(img).toBeInTheDocument();
-    expect(img.src).toContain(metroid.imgSrc);
+    expect(img.src).toContain(metroid.imgThumbSrc);
     expect(img.alt).toBe('super metroid');
   });
 
@@ -41,8 +43,9 @@ describe('Product card tests', () => {
   });
 
   it('Renders default image if image prop is missing', () => {
-    const { imgSrc: _imgSrc, ...noImgSrcMetroid } = metroid;
-    render(<ProductCard {...noImgSrcMetroid} />);
+    const { imgThumbSrc: _imgThumbSrc, ...noImgThumbSrcMetroid } =
+      metroid;
+    render(<ProductCard {...noImgThumbSrcMetroid} />);
     const img = screen.getByRole('img');
 
     expect(img.src).toContain(defaultGameImg);
