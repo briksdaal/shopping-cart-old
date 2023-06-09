@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import ProductCard from '../components/ProductCard';
-import superMetroidImg from '../media/super_metroid_thumbnail.webp';
-import defaultGameImg from '../media/default_game_thumbnail.webp';
+import superMetroidImg from '../../media/super_metroid_thumbnail.webp';
+import defaultGameImg from '../../media/default_game_thumbnail.webp';
 
 const metroid = {
   id: 5,
