@@ -2,17 +2,9 @@ import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import ProductPage from '../components/ProductPage';
-import superMetroidImg from '../media/super_metroid_full.webp';
-import defaultGameImg from '../media/default_game_full.webp';
+import { defaultGame, products } from '../data.js';
 
-const metroid = {
-  id: 5,
-  title: 'Super Metroid',
-  price: '$29.00',
-  description:
-    'SNES Super Metroid, mint condition, bought 1996, in original package.',
-  imgFullSrc: superMetroidImg
-};
+const metroid = products[11];
 
 describe('Product page info and image tests', () => {
   it('Renders product title', () => {
@@ -26,7 +18,7 @@ describe('Product page info and image tests', () => {
 
   it('Renders product price with cents and dollar sign', () => {
     render(<ProductPage {...metroid} />);
-    const price = screen.getByText('$29.00');
+    const price = screen.getByText(metroid.price);
 
     expect(price).toBeInTheDocument();
   });
@@ -42,9 +34,7 @@ describe('Product page info and image tests', () => {
 
   it('Renders product description', () => {
     render(<ProductPage {...metroid} />);
-    const desc = screen.getByText(
-      'SNES Super Metroid, mint condition, bought 1996, in original package.'
-    );
+    const desc = screen.getByText(metroid.description);
 
     expect(desc).toBeInTheDocument();
   });
@@ -54,8 +44,7 @@ describe('Product page info and image tests', () => {
       metroid;
     render(<ProductPage {...noImgFullSrcMetroid} />);
     const img = screen.getByRole('img');
-
-    expect(img.src).toContain(defaultGameImg);
+    expect(img.src).toContain(defaultGame.imgFullSrc);
     expect(img.alt).toBe('snes game');
   });
 });

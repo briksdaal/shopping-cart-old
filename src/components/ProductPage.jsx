@@ -1,4 +1,4 @@
-import defaultGameImg from '../../media/default_game_full.webp';
+import { defaultGame } from '../data.js';
 
 export default function ProductPage({
   title,
@@ -19,7 +19,7 @@ export default function ProductPage({
       </div>
       <div className="product-img">
         <img
-          src={imgFullSrc || defaultGameImg}
+          src={imgFullSrc || defaultGame.imgFullSrc}
           alt={imgFullSrc ? title.toLowerCase() : 'snes game'}
         />
       </div>

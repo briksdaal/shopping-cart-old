@@ -1,14 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import ProductCard from '../components/ProductCard';
-import superMetroidImg from '../../media/super_metroid_thumbnail.webp';
-import defaultGameImg from '../../media/default_game_thumbnail.webp';
+import { defaultGame, products } from '../data.js';
 
-const metroid = {
-  id: 5,
-  title: 'Super Metroid',
-  price: '$29.00',
-  imgThumbSrc: superMetroidImg
-};
+const metroid = products[11];
 
 describe('Product card tests', () => {
   it('Renders product title', () => {
@@ -22,7 +16,7 @@ describe('Product card tests', () => {
 
   it('Renders product price with cents and dollar sign', () => {
     render(<ProductCard {...metroid} />);
-    const price = screen.getByText('$29.00');
+    const price = screen.getByText(metroid.price);
 
     expect(price).toBeInTheDocument();
   });
@@ -39,7 +33,7 @@ describe('Product card tests', () => {
   it('Renders container with id-based class', () => {
     const { container } = render(<ProductCard {...metroid} />);
 
-    expect(container.firstChild).toHaveClass('card-5');
+    expect(container.firstChild).toHaveClass(`card-${metroid.id}`);
   });
 
   it('Renders default image if image prop is missing', () => {
@@ -48,7 +42,7 @@ describe('Product card tests', () => {
     render(<ProductCard {...noImgThumbSrcMetroid} />);
     const img = screen.getByRole('img');
 
-    expect(img.src).toContain(defaultGameImg);
+    expect(img.src).toContain(defaultGame.imgThumbSrc);
     expect(img.alt).toBe('snes game');
   });
 

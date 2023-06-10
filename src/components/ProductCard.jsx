@@ -1,4 +1,4 @@
-import defaultGameImg from '../media/default_game_thumbnail.webp';
+import { defaultGame } from '../data.js';
 
 export default function ProductCard({
   id,
@@ -16,7 +16,7 @@ export default function ProductCard({
         <h3>{title}</h3>
         <div>{price}</div>
         <img
-          src={imgThumbSrc || defaultGameImg}
+          src={imgThumbSrc || defaultGame.imgThumbSrc}
           alt={imgThumbSrc ? title.toLowerCase() : 'snes game'}
         />
       </a>
