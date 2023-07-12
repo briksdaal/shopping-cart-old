@@ -11,7 +11,9 @@ export default function ProductCard({
   }
 
   return (
-    <div className={`card-${id}`}>
+    <div
+      className={`product-card card-${id}`}
+      data-testid="product-card">
       <a href="#">
         <h3>{title}</h3>
         <div>{price}</div>
